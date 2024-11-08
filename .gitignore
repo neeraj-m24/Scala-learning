@@ -1,1 +1,5 @@
 notes.scala
+
+.bsp/
+.scala-build/
+.DS_Store
