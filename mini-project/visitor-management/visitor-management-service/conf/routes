@@ -1,0 +1,26 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+
+# Default Route
+GET     /                               controllers.VisitorController.index
+
+# Employee Routes
+GET    /api/employees          controllers.EmployeeController.list()
+POST    /api/employee          controllers.EmployeeController.addEmployee()
+GET     /api/employee/:id       controllers.EmployeeController.getEmployeeDetails(id: Long)
+
+# Visitor Management Routes
+POST    /api/visitor/checkin                controllers.VisitorController.checkInVisitor()
+POST    /api/visitor/checkout/:id           controllers.VisitorController.checkOutVisitor(id: Long)
+GET     /api/visitor/:id                    controllers.VisitorController.getVisitorDetails(id: Long)
+GET     /api/visitor-approval/approve/:id       controllers.VisitorController.approve(id: Long)
+GET     /api/visitor-approval/reject/:id        controllers.VisitorController.reject(id: Long)
+GET     /api/visitors                       controllers.VisitorController.list()
+
+
+
+# Assets
+#GET     /assets/*file                     controllers.Assets.versioned(path="/public", file: Asset)
+
+# Health Check Route
+#GET     /healthcheck                      controllers.HealthCheckController.check()
