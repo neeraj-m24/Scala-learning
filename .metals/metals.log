@@ -1,0 +1,160 @@
+2024.11.09 15:50:39 INFO  Started: Metals version 1.4.0 in folders '/Users/neerajkumarmilan/Desktop/scala_learning' for client Visual Studio Code 1.94.2.
+2024.11.09 15:50:39 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+Nov 09, 2024 3:50:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didOpen",
+  "params": {
+    "textDocument": {
+      "uri": "file:///Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala",
+      "languageId": "scala",
+      "version": 1,
+      "text": "import scala.collection.mutable.ListBuffer\nimport scala.io.StdIn.readLine\n\ncase class Employee(eid: Int, ename: String, city: String) {\n  override def toString: String \u003d s\"  |__($eid, $ename, $city)\"\n}\n\ncase class Department(departmentName: String, employees: ListBuffer[Employee] \u003d ListBuffer(), subDepartments: ListBuffer[Department] \u003d ListBuffer()) {\n  override def toString: String \u003d s\"  |__$departmentName\"\n}\n\nclass Organization {\n  // To ensure the root department is only added once, we\u0027ll create a flag\n  var rootDepartment: Option[Department] \u003d None\n\n  // Method to add a department, including employees\n  def addDepartment(root: Department, parentDept: String, deptName: String, employees: ListBuffer[Employee]): String \u003d {\n    // Handle the root department creation if it\u0027s not yet created\n    if (rootDepartment.isEmpty) {\n      rootDepartment \u003d Some(Department(\"Organization\"))\n    }\n\n    // Find or create the parent department\n    val parent \u003d findOrCreateDepartment(root, parentDept)\n    // Find or create the current department\n    val currentDept \u003d findOrCreateDepartment(parent, deptName)\n\n    // Add employees to the current department\n    currentDept.employees ++\u003d employees\n  }\n\n  // Method to find an existing department or create it if it doesn\u0027t exist\n  private def findOrCreateDepartment(parentDept: Department, deptName: String): Department \u003d {\n\n    parentDept.subDepartments.find(_.departmentName \u003d\u003d deptName) match {\n      case Some(dept) \u003d\u003e dept\n      case None \u003d\u003e\n        val newDept \u003d Department(deptName)\n        parentDept.subDepartments +\u003d newDept\n        newDept\n    }\n  }\n\n  // Method to display the organization structure\n  def displayStructure(root: Department): Unit \u003d {\n    println(s\"\\nOrganization Structure:\")\n    printDepartment(root, 1)\n  }\n\n  // Helper method to recursively print departments and employees\n  private def printDepartment(dept: Department, indent: Int): Unit \u003d {\n    println(\" \" * indent + s\"|--- ${dept.departmentName}\")\n    dept.employees.foreach(emp \u003d\u003e println(\" \" * (indent + 2) + s\"|--- $emp\"))\n    dept.subDepartments.foreach(subDept \u003d\u003e printDepartment(subDept, indent + 2))\n  }\n}\n\nobject OrganizationApp {\n  def main(args: Array[String]): Unit \u003d {\n    val org \u003d new Organization()\n    val root \u003d Department(\"Organization\")\n    var continue \u003d true\n\n    println(\"Welcome to the Organization Management System!\")\n    while (continue) {\n      println(\"\\nChoose an option:\")\n      println(\"1. View Current Organization Structure\")\n      println(\"2. Add into Organization\")\n      println(\"3. Exit\")\n      val choice \u003d readLine().trim\n\n      choice match {\n        case \"1\" \u003d\u003e org.displayStructure(root)\n        case \"2\" \u003d\u003e\n          val (parentDept, deptName, employees) \u003d getUserInputs()\n          println(org.addDepartment(root, parentDept, deptName, employees))\n        case \"3\" \u003d\u003e continue \u003d false\n        case _ \u003d\u003e println(\"Invalid choice, please try again.\")\n      }\n    }\n  }\n\n  // Method to get user inputs for department and employee details\n  def getUserInputs(): (String, String, ListBuffer[Employee]) \u003d {\n    // Ensuring the parent department cannot be empty\n    var parentDept \u003d \"\"\n    while (parentDept.trim.isEmpty) {\n      parentDept \u003d readLine(\"Enter the parent department name: \").trim\n      if (parentDept.isEmpty) {\n        println(\"Parent department cannot be empty. Please enter a valid department name.\")\n      }\n    }\n\n    // Ensuring the department name cannot be empty\n    var deptName \u003d \"\"\n    while (deptName.trim.isEmpty) {\n      deptName \u003d readLine(\"Enter the department name: \").trim\n      if (deptName.isEmpty) {\n        println(\"Department name cannot be empty. Please enter a valid department name.\")\n      }\n    }\n\n    var employees \u003d ListBuffer[Employee]()\n\n    var addMoreEmployees \u003d true\n    while (addMoreEmployees) {\n      println(\"1. Add employee details\")\n      println(\"2. Done adding employees\")\n      val empChoice \u003d readLine().trim\n\n      empChoice match {\n        case \"1\" \u003d\u003e\n          // Ensuring the employee ID is valid\n          var eid \u003d -1\n          while (eid \u003c\u003d 0) {\n            val eidStr \u003d readLine(\"Enter Employee ID: \").trim\n            if (eidStr.isEmpty || !eidStr.forall(_.isDigit)) {\n              println(\"Employee ID must be a positive integer. Please enter a valid Employee ID.\")\n            } else {\n              eid \u003d eidStr.toInt\n            }\n          }\n\n          // Ensuring the employee name is not empty\n          var ename \u003d \"\"\n          while (ename.trim.isEmpty) {\n            ename \u003d readLine(\"Enter Employee name: \").trim\n            if (ename.isEmpty) {\n              println(\"Employee name cannot be empty. Please enter a valid name.\")\n            }\n          }\n\n          // Ensuring the employee city is not empty\n          var city \u003d \"\"\n          while (city.trim.isEmpty) {\n            city \u003d readLine(\"Enter Employee city: \").trim\n            if (city.isEmpty) {\n              println(\"Employee city cannot be empty. Please enter a valid city.\")\n            }\n          }\n\n          employees +\u003d Employee(eid, ename, city)\n\n        case \"2\" \u003d\u003e addMoreEmployees \u003d false\n        case _ \u003d\u003e println(\"Invalid option, try again.\")\n      }\n    }\n\n    (parentDept, deptName, employees)\n  }\n}\n"
+    }
+  }
+}
+java.lang.IllegalStateException: An unexpected exception occurred while executing jsonrpc method public abstract java.util.concurrent.CompletableFuture scala.meta.metals.lsp.TextDocumentService.didOpen(org.eclipse.lsp4j.DidOpenTextDocumentParams)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:73)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:231)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:198)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.nio.file.NoSuchFileException: /Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:379)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:431)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3268)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:42)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:18)
+	at scala.meta.internal.metals.MetalsLspService.didOpen(MetalsLspService.scala:752)
+	at scala.meta.internal.metals.WorkspaceLspService.didOpen(WorkspaceLspService.scala:401)
+	at scala.meta.metals.lsp.DelegatingScalaService.didOpen(DelegatingScalaService.scala:39)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	... 11 more
+
+2024.11.09 15:50:40 INFO  Running List(/opt/homebrew/bin/scala, setup-ide, /Users/neerajkumarmilan/Desktop/scala_learning)
+2024.11.09 15:50:41 INFO  Attempting to connect to the build server...
+2024.11.09 15:50:41 INFO  Running BSP server List(/opt/homebrew/Cellar/scala/3.5.2/libexec/bin/scala-cli.jar, --cli-default-scala-version, 3.5.2, --repository, file:///opt/homebrew/Cellar/scala/3.5.2/libexec/maven2, --prog-name, scala, bsp, --json-options, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-options-v2.json, --json-launcher-options, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-launcher-options.json, --envs-file, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-envs.json, /Users/neerajkumarmilan/Desktop/scala_learning)
+2024.11.09 15:50:40 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/neerajkumarmilan/Desktop/scala_learning/.metals/bsp.trace.json or /Users/neerajkumarmilan/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.11.09 15:50:42 INFO  BSP server: Downloading https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/0.10.0/semanticdb-javac-0.10.0.pom
+2024.11.09 15:50:42 INFO  BSP server: Downloaded https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/0.10.0/semanticdb-javac-0.10.0.pom
+2024.11.09 15:50:42 INFO  BSP server: Downloading https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/0.10.0/semanticdb-javac-0.10.0.jar
+2024.11.09 15:50:44 INFO  BSP server: Downloaded https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/0.10.0/semanticdb-javac-0.10.0.jar
+2024.11.09 15:50:45 INFO  time: Connected to build server in 4.04s
+2024.11.09 15:50:45 INFO  Connected to Build server: scala v1.4.3
+2024.11.09 15:50:45 INFO  time: Imported build in 0.11s
+2024.11.09 15:50:45 INFO  running doctor check
+2024.11.09 15:50:45 INFO  java targets: scala_learning_3e4a23aa43, scala_learning_3e4a23aa43-test
+2024.11.09 15:50:45 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:50:45 INFO  time: compiled scala_learning_3e4a23aa43 in 0.82s
+2024.11.09 15:50:45 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:50:46 INFO  time: compiled scala_learning_3e4a23aa43 in 0.45s
+2024.11.09 15:50:54 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+2024.11.09 15:50:58 INFO  time: indexed workspace in 13s
+2024.11.09 15:51:07 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:51:07 INFO  time: compiled scala_learning_3e4a23aa43 in 0.27s
+2024.11.09 15:51:07 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:51:07 INFO  time: compiled scala_learning_3e4a23aa43 in 0.24s
+2024.11.09 15:51:12 WARN  Could not find semantic tokens for: file:///Users/neerajkumarmilan/Desktop/scala_learning/notes.scala
+2024.11.09 15:51:15 WARN  Could not find semantic tokens for: file:///Users/neerajkumarmilan/Desktop/scala_learning/notes.scala
+2024.11.09 15:51:57 INFO  no build target found for /Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:52:09 INFO  Shutting down server
+2024.11.09 15:52:09 INFO  shutting down Metals
+2024.11.09 15:52:09 INFO  Shut down connection with build server.
+2024.11.09 15:52:09 INFO  Started: Metals version 1.4.0 in folders '/Users/neerajkumarmilan/Desktop/scala_learning' for client Visual Studio Code 1.94.2.
+2024.11.09 15:52:09 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+Nov 09, 2024 3:52:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didOpen",
+  "params": {
+    "textDocument": {
+      "uri": "file:///Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala",
+      "languageId": "scala",
+      "version": 1,
+      "text": "import scala.collection.mutable.ListBuffer\nimport scala.io.StdIn.readLine\n\ncase class Employee(eid: Int, ename: String, city: String) {\n  override def toString: String \u003d s\"  |__($eid, $ename, $city)\"\n}\n\ncase class Department(departmentName: String, employees: ListBuffer[Employee] \u003d ListBuffer(), subDepartments: ListBuffer[Department] \u003d ListBuffer()) {\n  override def toString: String \u003d s\"  |__$departmentName\"\n}\n\nclass Organization {\n  // To ensure the root department is only added once, we\u0027ll create a flag\n  var rootDepartment: Option[Department] \u003d None\n\n  // Method to add a department, including employees\n  def addDepartment(root: Department, parentDept: String, deptName: String, employees: ListBuffer[Employee]): String \u003d {\n    // Handle the root department creation if it\u0027s not yet created\n    if (rootDepartment.isEmpty) {\n      rootDepartment \u003d Some(Department(\"Organization\"))\n    }\n\n    // Find or create the parent department\n    val parent \u003d findOrCreateDepartment(root, parentDept)\n    // Find or create the current department\n    val currentDept \u003d findOrCreateDepartment(parent, deptName)\n\n    // Add employees to the current department\n    currentDept.employees ++\u003d employees\n  }\n\n  // Method to find an existing department or create it if it doesn\u0027t exist\n  private def findOrCreateDepartment(parentDept: Department, deptName: String): Department \u003d {\n\n    parentDept.subDepartments.find(_.departmentName \u003d\u003d deptName) match {\n      case Some(dept) \u003d\u003e dept\n      case None \u003d\u003e\n        val newDept \u003d Department(deptName)\n        parentDept.subDepartments +\u003d newDept\n        newDept\n    }\n  }\n\n  // Method to display the organization structure\n  def displayStructure(root: Department): Unit \u003d {\n    println(s\"\\nOrganization Structure:\")\n    printDepartment(root, 1)\n  }\n\n  // Helper method to recursively print departments and employees\n  private def printDepartment(dept: Department, indent: Int): Unit \u003d {\n    println(\" \" * indent + s\"|--- ${dept.departmentName}\")\n    dept.employees.foreach(emp \u003d\u003e println(\" \" * (indent + 2) + s\"|--- $emp\"))\n    dept.subDepartments.foreach(subDept \u003d\u003e printDepartment(subDept, indent + 2))\n  }\n}\n\nobject OrganizationApp {\n  def main(args: Array[String]): Unit \u003d {\n    val org \u003d new Organization()\n    val root \u003d Department(\"Organization\")\n    var continue \u003d true\n\n    println(\"Welcome to the Organization Management System!\")\n    while (continue) {\n      println(\"\\nChoose an option:\")\n      println(\"1. View Current Organization Structure\")\n      println(\"2. Add into Organization\")\n      println(\"3. Exit\")\n      val choice \u003d readLine().trim\n\n      choice match {\n        case \"1\" \u003d\u003e org.displayStructure(root)\n        case \"2\" \u003d\u003e\n          val (parentDept, deptName, employees) \u003d getUserInputs()\n          println(org.addDepartment(root, parentDept, deptName, employees))\n        case \"3\" \u003d\u003e continue \u003d false\n        case _ \u003d\u003e println(\"Invalid choice, please try again.\")\n      }\n    }\n  }\n\n  // Method to get user inputs for department and employee details\n  def getUserInputs(): (String, String, ListBuffer[Employee]) \u003d {\n    // Ensuring the parent department cannot be empty\n    var parentDept \u003d \"\"\n    while (parentDept.trim.isEmpty) {\n      parentDept \u003d readLine(\"Enter the parent department name: \").trim\n      if (parentDept.isEmpty) {\n        println(\"Parent department cannot be empty. Please enter a valid department name.\")\n      }\n    }\n\n    // Ensuring the department name cannot be empty\n    var deptName \u003d \"\"\n    while (deptName.trim.isEmpty) {\n      deptName \u003d readLine(\"Enter the department name: \").trim\n      if (deptName.isEmpty) {\n        println(\"Department name cannot be empty. Please enter a valid department name.\")\n      }\n    }\n\n    var employees \u003d ListBuffer[Employee]()\n\n    var addMoreEmployees \u003d true\n    while (addMoreEmployees) {\n      println(\"1. Add employee details\")\n      println(\"2. Done adding employees\")\n      val empChoice \u003d readLine().trim\n\n      empChoice match {\n        case \"1\" \u003d\u003e\n          // Ensuring the employee ID is valid\n          var eid \u003d -1\n          while (eid \u003c\u003d 0) {\n            val eidStr \u003d readLine(\"Enter Employee ID: \").trim\n            if (eidStr.isEmpty || !eidStr.forall(_.isDigit)) {\n              println(\"Employee ID must be a positive integer. Please enter a valid Employee ID.\")\n            } else {\n              eid \u003d eidStr.toInt\n            }\n          }\n\n          // Ensuring the employee name is not empty\n          var ename \u003d \"\"\n          while (ename.trim.isEmpty) {\n            ename \u003d readLine(\"Enter Employee name: \").trim\n            if (ename.isEmpty) {\n              println(\"Employee name cannot be empty. Please enter a valid name.\")\n            }\n          }\n\n          // Ensuring the employee city is not empty\n          var city \u003d \"\"\n          while (city.trim.isEmpty) {\n            city \u003d readLine(\"Enter Employee city: \").trim\n            if (city.isEmpty) {\n              println(\"Employee city cannot be empty. Please enter a valid city.\")\n            }\n          }\n\n          employees +\u003d Employee(eid, ename, city)\n\n        case \"2\" \u003d\u003e addMoreEmployees \u003d false\n        case _ \u003d\u003e println(\"Invalid option, try again.\")\n      }\n    }\n\n    (parentDept, deptName, employees)\n  }\n}\n"
+    }
+  }
+}
+java.lang.IllegalStateException: An unexpected exception occurred while executing jsonrpc method public abstract java.util.concurrent.CompletableFuture scala.meta.metals.lsp.TextDocumentService.didOpen(org.eclipse.lsp4j.DidOpenTextDocumentParams)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:73)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:231)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:198)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.nio.file.NoSuchFileException: /Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:379)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:431)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3268)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:42)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:18)
+	at scala.meta.internal.metals.MetalsLspService.didOpen(MetalsLspService.scala:752)
+	at scala.meta.internal.metals.WorkspaceLspService.didOpen(WorkspaceLspService.scala:401)
+	at scala.meta.metals.lsp.DelegatingScalaService.didOpen(DelegatingScalaService.scala:39)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	... 11 more
+
+2024.11.09 15:52:10 INFO  Attempting to connect to the build server...
+2024.11.09 15:52:10 INFO  Running BSP server List(/opt/homebrew/Cellar/scala/3.5.2/libexec/bin/scala-cli.jar, --cli-default-scala-version, 3.5.2, --repository, file:///opt/homebrew/Cellar/scala/3.5.2/libexec/maven2, --prog-name, scala, bsp, --json-options, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-options-v2.json, --json-launcher-options, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-launcher-options.json, --envs-file, /Users/neerajkumarmilan/Desktop/scala_learning/.scala-build/ide-envs.json, /Users/neerajkumarmilan/Desktop/scala_learning)
+2024.11.09 15:52:10 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/neerajkumarmilan/Desktop/scala_learning/.metals/bsp.trace.json or /Users/neerajkumarmilan/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.11.09 15:52:12 INFO  time: Connected to build server in 1.8s
+2024.11.09 15:52:12 INFO  Connected to Build server: scala v1.4.3
+2024.11.09 15:52:12 INFO  running doctor check
+2024.11.09 15:52:12 INFO  java targets: scala_learning_3e4a23aa43, scala_learning_3e4a23aa43-test
+2024.11.09 15:52:12 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:52:12 INFO  time: compiled scala_learning_3e4a23aa43 in 0.22s
+2024.11.09 15:52:12 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:52:12 INFO  time: compiled scala_learning_3e4a23aa43 in 0.19s
+2024.11.09 15:52:13 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+2024.11.09 15:52:13 INFO  time: indexed workspace in 1.68s
+2024.11.09 15:52:14 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:52:14 INFO  time: compiled scala_learning_3e4a23aa43 in 0.22s
+2024.11.09 15:52:14 INFO  compiling scala_learning_3e4a23aa43 (15 scala sources)
+2024.11.09 15:52:14 INFO  time: compiled scala_learning_3e4a23aa43 in 0.21s
+2024.11.09 15:52:55 ERROR SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024.11.09 15:52:55 ERROR SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024.11.09 15:52:55 ERROR SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024.11.09 15:53:01 INFO  
+2024.11.09 15:53:01 INFO  Template applied in /Users/neerajkumarmilan/Desktop/./akka-scala-microservice
+2024.11.09 15:53:01 INFO  
+2024.11.09 15:53:01 INFO  time: ran 'giter8.Giter8' in 6.88s
+2024.11.09 15:54:05 INFO  logging to files /Users/neerajkumarmilan/Desktop/scala_learning/.metals/metals.log,/Users/neerajkumarmilan/Desktop/akka-scala-microservice/.metals/metals.log
+2024.11.09 15:54:05 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+2024.11.09 15:54:42 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:54:42 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:54:43 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:54:43 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:54:44 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:55:09 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:58:01 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:58:05 INFO  no build target found for /Users/neerajkumarmilan/Desktop/akka-scala-microservice/src/main/scala/com/example/AkkaQuickstart.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:58:08 INFO  no build target found for /Users/neerajkumarmilan/Desktop/scala_learning/Day5/assignment/assignment/organizationTree.scala. Using presentation compiler with project's scala-library version: 3.3.4
+2024.11.09 15:58:11 INFO  Shutting down server
+2024.11.09 15:58:11 INFO  shutting down Metals
+2024.11.09 15:58:11 INFO  Shut down connection with build server.
+2024.11.09 15:58:11 INFO  Exiting server
