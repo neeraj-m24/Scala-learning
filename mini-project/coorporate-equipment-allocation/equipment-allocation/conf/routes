@@ -28,10 +28,6 @@ PUT /api/equipments/:id controllers.EquipmentController.update(id: Long)
 # Route to delete an equipment item
 DELETE /api/equipments/:id controllers.EquipmentController.delete(id: Long)
 
-# Endpoint for testing Futures
-GET /api/futures controllers.EquipmentController.testFuture()
-
-
 # Endpoints for equipment allocations
 
 GET /api/allocations controllers.EquipmentAllocationController.list()
@@ -40,8 +36,6 @@ GET /api/allocations/:id controllers.EquipmentAllocationController.getById(id: L
 
 POST /api/allocations controllers.EquipmentAllocationController.add
 
-
-POST /api/allocations/testKafka controllers.EquipmentAllocationController.testKafka
 
 # return equipment
 
