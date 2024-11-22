@@ -10,7 +10,7 @@ class NotificationHandler(itSupportProcessor: ActorRef, hostProcessor: ActorRef,
 
   // Kafka Consumer configuration (same as before)
   private val consumerConfig = new java.util.Properties()
-  consumerConfig.put("bootstrap.servers", "localhost:9092")
+  consumerConfig.put("bootstrap.servers", "kafka1:9092")
   consumerConfig.put("group.id", "visitor-notification-group")
   consumerConfig.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   consumerConfig.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
@@ -27,9 +27,7 @@ class NotificationHandler(itSupportProcessor: ActorRef, hostProcessor: ActorRef,
       decode[Visitor](message) match {
         case Right(visitor) =>
           visitor.status match {
-            case "pending" =>
-              // For pending status, notify the host for verification
-              hostProcessor ! visitor
+
 
             case "check-in" =>
               // For check-in status, notify IT Support, Host, and Security
