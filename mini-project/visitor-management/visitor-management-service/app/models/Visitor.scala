@@ -17,7 +17,7 @@ case class Visitor(
                     contactNumber: String,  // Visitor's contact number
                     checkInTime: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),  // Default to the current time
                     checkOutTime: Option[String] = None,  // Optional check-out time (if applicable)
-                    status: String = "Waiting",  // Default status is "Waiting"
+                    status: String = "Checked-in",  // Default status is "Waiting"
                     identityProof: Array[Byte],  // Binary data representing the identity proof (e.g., image, document)
                   )
 
