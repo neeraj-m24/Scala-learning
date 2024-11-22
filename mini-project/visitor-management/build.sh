@@ -1,5 +1,5 @@
 
-cd vistior-management-service
+cd visitor-management-service
 docker build -t visitor-management-service:latest .
 
 cd ..

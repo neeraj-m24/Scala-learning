@@ -1,0 +1,13 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/neerajkumarmilan/Desktop/self-learning/Day14/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.4/util-interface-1.10.4.pom[0m
+[0m[[0m[0minfo[0m] [0m[0mdownloaded https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.4/util-interface-1.10.4.pom[0m
+[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.4/util-interface-1.10.4.jar[0m
+[0m[[0m[0minfo[0m] [0m[0mdownloaded https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.4/util-interface-1.10.4.jar[0m
+[0m[[0m[0minfo[0m] [0m[0mNon-compiled module 'compiler-bridge_2.12' for Scala 2.12.13. Compiling...[0m
+[0m[[0m[0minfo[0m] [0m[0mAttempting to fetch org.scala-sbt:compiler-bridge_2.12:1.10.4.[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Error compiling the sbt component 'compiler-bridge_2.12'[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 3 s, completed 21-Nov-2024, 3:52:48 pm[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
