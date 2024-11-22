@@ -14,6 +14,7 @@ class VisitorTable(tag: Tag) extends Table[Visitor](tag, "visitors") {
   def checkInTime = column[String]("check_in_time")
   def checkOutTime = column[Option[String]]("check_out_time")
   def status = column[String]("status")
+  def identityProof = column[Array[Byte]]("identity_proof")
 
-  def * = (visitorId, name, hostName, hostMail, building, email, contactNumber, checkInTime, checkOutTime, status) <> ((Visitor.apply _).tupled, Visitor.unapply)
+  def * = (visitorId, name, hostName, hostMail, building, email, contactNumber, checkInTime, checkOutTime, status,identityProof) <> ((Visitor.apply _).tupled, Visitor.unapply)
 }

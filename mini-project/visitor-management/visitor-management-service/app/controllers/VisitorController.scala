@@ -54,7 +54,8 @@ class VisitorController @Inject()(
                     hostMail = hostMail,
                     building = building,
                     email = email,
-                    contactNumber = contactNumber
+                    contactNumber = contactNumber,
+                    identityProof = byteArray
                   )
 
                   // Validate if host email is valid

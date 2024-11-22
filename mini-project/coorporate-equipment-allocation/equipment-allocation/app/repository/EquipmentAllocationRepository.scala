@@ -20,18 +20,6 @@ class EquipmentAllocationRepository @Inject() (dbConfigProvider:DatabaseConfigPr
   import dbConfig._
   import profile.api._
 
-  //  private class EquipmentAllocationTable(tag:Tag) extends Table[EquipmentAllocation](tag,"equipment_allocation"){
-  //    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
-  //    def employeeId = column[Long]("employee_id")
-  //    def startDate = column[LocalDateTime]("start_date")
-  //    def endDate = column[LocalDateTime]("end_date")
-  //    def reason = column[String]("reason")
-  //    def equipmentId= column[Long]("equipment_id")
-  ////    def equipmentFk=foreignKey("equipment_fk",equipmentId,TableQuery[Equipment])(_.id)
-  //    def * = (id, employeeId, startDate, endDate, reason) <> ((EquipmentAllocation.apply _).tupled, EquipmentAllocation.unapply)
-  //  }
-
-
   private val equipmentAllocations = lifted.TableQuery[EquipmentAllocationTable]
   private val equipments = lifted.TableQuery[EquipmentTable]
 
@@ -105,9 +93,6 @@ class EquipmentAllocationRepository @Inject() (dbConfigProvider:DatabaseConfigPr
     } yield (allocation, equipment)
 
     db.run(query.result)
-
-
-
 
   }
 

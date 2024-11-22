@@ -70,7 +70,7 @@ def returnEquipment(id:Long,status:String)=Action.async{
         {
 
           val kafkaMessage:MessageSchema=(equipmentAllocation,equipment,ALLOCATION)
-          kafkaProducerService.sendMessage("test","key",Json.toJson(kafkaMessage).toString())
+
           println(equipmentAllocation)
           Ok(Json.obj("message" -> "Equipment returned successfully"))
         }
