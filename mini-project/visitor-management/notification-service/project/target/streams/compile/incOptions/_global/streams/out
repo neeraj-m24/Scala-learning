@@ -1,5 +1,5 @@
-[debug] Created transactional ClassFileManager with tempDir = /Users/neerajkumarmilan/Desktop/scala_learning/project/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
+[debug] Created transactional ClassFileManager with tempDir = /Users/neerajkumarmilan/Desktop/scala_learning/mini-project/visitor-management/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
 [debug] About to delete class files:
 [debug] We backup class files:
-[debug] Created transactional ClassFileManager with tempDir = /Users/neerajkumarmilan/Desktop/scala_learning/project/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
-[debug] Removing the temporary directory used for backing up class files: /Users/neerajkumarmilan/Desktop/scala_learning/project/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
+[debug] Created transactional ClassFileManager with tempDir = /Users/neerajkumarmilan/Desktop/scala_learning/mini-project/visitor-management/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
+[debug] Removing the temporary directory used for backing up class files: /Users/neerajkumarmilan/Desktop/scala_learning/mini-project/visitor-management/notification-service/project/target/scala-2.12/sbt-1.0/classes.bak
