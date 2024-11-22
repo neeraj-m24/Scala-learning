@@ -1,6 +1,6 @@
 package services
 
-import models.{Visitor, VisitorIdentityProof}
+import models.{Visitor}
 import repositories.VisitorRepository
 
 import javax.inject._
