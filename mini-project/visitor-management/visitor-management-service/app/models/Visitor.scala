@@ -17,7 +17,7 @@ case class Visitor(
                     contactNumber: String,  // Visitor's contact number
                     checkInTime: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),  // Default to the current time
                     checkOutTime: Option[String] = None,  // Optional check-out time (if applicable)
-                    status: String = "Checked-in",  // Default status is "Waiting"
+                    status: String = "check-in",  // Default status is "Waiting"
                     identityProof: Array[Byte],  // Binary data representing the identity proof (e.g., image, document)
                   )
 
@@ -36,7 +36,7 @@ object Visitor {
       (JsPath \ "contactNumber").read[String] and  // Visitor's contact number
       (JsPath \ "checkInTime").readWithDefault[String](LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)) and  // Default to current time
       (JsPath \ "checkOutTime").readNullable[String] and  // Optional check-out time
-      (JsPath \ "status").readWithDefault[String]("Checked In") and  // Default status is "Checked In"
+      (JsPath \ "status").readWithDefault[String]("check-in") and  // Default status is "Checked In"
       (JsPath \ "identityProof").read[Array[Byte]]  // Identity proof field (binary data)
     )(Visitor.apply _)  // Map the data to the case class
 

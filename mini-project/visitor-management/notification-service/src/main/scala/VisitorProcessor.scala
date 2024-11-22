@@ -27,8 +27,12 @@ class ITSupportProcessor extends Actor {
                |""".stripMargin
 
           // Send Wi-Fi details email
-          EmailUtils.sendEmail(email, subject, body)
+//          EmailUtils.sendEmail(email, subject, body)
+          println("="*80)
+          println(s"Subject: ${subject}")
+          println(body)
           println(s"Wi-Fi details email sent to $email successfully.")
+          println("="*80)
 
         case "check-out" =>
           // Define exit notification email content
@@ -46,8 +50,14 @@ class ITSupportProcessor extends Actor {
                |""".stripMargin
 
           // Send exit confirmation email
-          EmailUtils.sendEmail(email, subject, body)
+//          EmailUtils.sendEmail(email, subject, body)
+          println("="*80)
+          println(s"Subject: ${subject}")
+          println(body)
           println(s"Exit confirmation email sent to $email successfully.")
+          println("="*80)
+
+
 
         case _ =>
           println(s"Unknown visitor status: ${visitor.status}")
@@ -65,31 +75,6 @@ class HostProcessor extends Actor {
       val building = visitor.building
 
       visitor.status match {
-        case "pending" =>
-          // Define visitor arrival notification for approval
-          val subject = "Visitor Arrival Notification"
-          val approvalLink = s"http://your-domain.com/visitor-approval/approve?visitorId=${visitor.visitorId.get}"
-          val rejectionLink = s"http://your-domain.com/visitor-approval/reject?visitorId=${visitor.visitorId.get}"
-          val body =
-            s"""
-               |Dear $hostName,
-               |
-               |Your visitor, $name, has arrived.
-               |
-               |Contact Number: $contactNumber
-               |Building: $building
-               |
-               |To allow entry, click here: $approvalLink
-               |To deny entry, click here: $rejectionLink
-               |
-               |Best regards,
-               |Visitor Management System
-               |""".stripMargin
-
-          // Send arrival notification email to host
-          EmailUtils.sendEmail(hostMail, subject, body)
-          println(s"Visitor arrival notification sent to host at $hostMail for visitor $name.")
-
         case "check-in" =>
           val subject = "Visitor Check-in Confirmation"
           val body =
@@ -102,9 +87,14 @@ class HostProcessor extends Actor {
                |Visitor Management System
                |""".stripMargin
 
-          // Send check-in confirmation email to host
-          EmailUtils.sendEmail(hostMail, subject, body)
+          // Send check-in confirmation to host
+          println("="*80)
+          println(s"Subject: ${subject}")
+          println(body)
           println(s"Visitor check-in confirmation sent to host at $hostMail for visitor $name.")
+          println("="*80)
+
+
 
         case "check-out" =>
           val subject = "Visitor Check-out Notification"
@@ -120,9 +110,13 @@ class HostProcessor extends Actor {
                |Visitor Management System
                |""".stripMargin
 
-          // Send check-out notification email to host
-          EmailUtils.sendEmail(hostMail, subject, body)
+          // Send check-out notification to host
+          println("="*80)
+          println(s"Subject: ${subject}")
+          println(body)
           println(s"Visitor check-out notification sent to host at $hostMail for visitor $name.")
+          println("="*80)
+
 
         case _ =>
           println(s"Unknown visitor status: ${visitor.status}")
@@ -139,9 +133,6 @@ class SecurityProcessor extends Actor {
 
         case "check-out" =>
           println(s"Security Team notified: Visitor ${visitor.name} has checked out.")
-
-        case "pending" =>
-          println(s"Security Team notified: Visitor ${visitor.name} is awaiting host confirmation.")
 
         case _ =>
           println(s"Unknown visitor status: ${visitor.status}")

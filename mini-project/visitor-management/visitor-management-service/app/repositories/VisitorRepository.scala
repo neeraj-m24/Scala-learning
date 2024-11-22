@@ -56,7 +56,7 @@ class VisitorRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
 
   def updateCheckOut(visitorId: Long): Future[Option[Visitor]] = {
     val currentTime = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)  // Current time for checkOutTime
-    val defaultStatus = "Checked-Out"  // Default status
+    val defaultStatus = "check-out"  // Default status
     // Construct the update query
     val updateQuery = visitors.filter(visitor => visitor.visitorId === visitorId)
       .map(v => (v.checkOutTime, v.status))
