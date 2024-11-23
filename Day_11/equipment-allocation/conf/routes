@@ -1,0 +1,45 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+
+# Equipment controller
+GET     /                           controllers.HomeController.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+
+
+# Route to list all equipment items
+GET     /api/equipments                 controllers.EquipmentController.list()
+# Route to get all available equipments
+
+GET /api/equipments/available  controllers.EquipmentController.getAvailableEquipments()
+# Route to get a specific equipment item by id
+GET     /api/equipments/:id              controllers.EquipmentController.getById(id: Long)
+# Route to create a new equipment item
+POST /api/equipments controllers.EquipmentController.add
+# Route to update an equipment item
+PUT /api/equipments/:id controllers.EquipmentController.update(id: Long)
+# Route to delete an equipment item
+DELETE /api/equipments/:id controllers.EquipmentController.delete(id: Long)
+
+# Endpoints for equipment allocations
+
+GET /api/allocations controllers.EquipmentAllocationController.list()
+
+GET /api/allocations/:id controllers.EquipmentAllocationController.getById(id: Long)
+
+POST /api/allocations controllers.EquipmentAllocationController.add
+
+
+# return equipment
+
+POST    /api/allocations/return/:id/:status    controllers.EquipmentAllocationController.returnEquipment(id: Long, status: String)
+
+
+POST    /api/login                controllers.AuthController.login
