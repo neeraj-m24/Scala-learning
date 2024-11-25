@@ -114,10 +114,26 @@ object Main {
 
 
   /*
-  * TODO: Create an RDD from a list of strings where each string represents a CSV row. Write a Spark program to parse the rows and
+  * Task 8. Create an RDD from a list of strings where each string represents a CSV row. Write a Spark program to parse the rows and
   * filter out records where the age is less than 18.
   * */
 
+    // File path to your CSV file
+    val filePath = "./large_people_data.csv" // Replace with the actual path to your file
+
+    // Read the CSV file into an RDD
+    val rdd8 = spark.sparkContext.textFile(filePath)
+
+    // Parse the rows, extract age, and filter out records where age is less than 18
+    val filteredRDD = rdd8.filter(row => {
+      val columns = row.split(",")
+      val age = columns(1).toInt
+      age >= 18
+    })
+
+    // Collect and print the filtered rows
+    println("Task 8: Filtered Rows:")
+    filteredRDD.collect().foreach(println)
 
     /*
     * Task 9. Create an RDD of integers from 1 to 100 and write a Spark program to compute their sum using an RDD action.
