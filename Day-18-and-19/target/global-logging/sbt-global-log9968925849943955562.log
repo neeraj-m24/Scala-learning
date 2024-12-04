@@ -1,0 +1,93 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(early(addDefaultCommands), None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(addDefaultCommands, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(early(initialize), None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(initialize, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(early(addPluginSbtFile="""/private/var/folders/y_/8w2hqv3d1yv0ylhyhsmsjxs80000gp/T/idea.sbt"""), None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(addPluginSbtFile="""/private/var/folders/y_/8w2hqv3d1yv0ylhyhsmsjxs80000gp/T/idea.sbt""", None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(boot, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(writeSbtVersion, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(reload, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtStashOnFailure, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(onFailure loadFailed, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(loadp, None, None)[0m
+[0m[[0m[0minfo[0m] [0m[0mwelcome to sbt 1.10.6 (Homebrew Java 21.0.5)[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.defaultLoad until apply took 25.220917ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m          Load.loadUnit: plugins took 23.126041ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m          Load.loadUnit: defsScala took 0.059958ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project[0m
+[0m[[0m[0mdebug[0m] [0m[0m            Load.loadUnit: mkEval took 2.498542ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found non-root projects [0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project, returning: ()[0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 3.272209 ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading settings for project day-18-and-19-build from idea.sbt...[0m
+[0m[[0m[0mdebug[0m] [0m[0m              Load.resolveProject(day-18-and-19-build) took 15.001042ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m            Load.loadTransitive: finalizeProject(Project(id day-18-and-19-build, base: /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project, plugins: List(<none>))) took 20.283417ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project, returning: (day-18-and-19-build)[0m
+[0m[[0m[0mdebug[0m] [0m[0m          Load.loadUnit: loadedProjectsRaw took 856.879291ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m          Load.loadUnit: cleanEvalClasses took 1.433041ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m        Load.loadUnit(file:/Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project/, ...) took 882.924375ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: load took 1079.085541ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: resolveProjects took 1.510709ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: finalTransforms took 20.362833ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: config.delegates took 1.498916ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: Def.make(settings)... took 105.116542ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: structureIndex took 25.613833ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.apply: mkStreams took 0.505833ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading project definition from /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/project[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Load.loadUnit: plugins took 1779.889083ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Load.loadUnit: defsScala took 0.001209ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.loadUnit: mkEval took 0.078209ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found root project root w/ remaining [0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(org.jetbrains.sbt.StructurePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(org.jetbrains.sbt.IdeaShellPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.StructurePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.IdeaShellPlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.SemanticdbPlugin,sbt.plugins.JUnitXmlReportPlugin,org.jetbrains.sbt.IdeaShellPlugin,org.jetbrains.sbt.StructurePlugin,sbt.plugins.MiniDependencyTreePlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 0.626166 ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading settings for project root from build.sbt...[0m
+[0m[[0m[0mdebug[0m] [0m[0m        Load.resolveProject(root) took 6.833125ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m      Load.loadTransitive: finalizeProject(Project(id root, base: /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19, plugins: List(<none>))) took 7.740542ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in /Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19, returning: (root)[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Load.loadUnit: loadedProjectsRaw took 416.645291ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Load.loadUnit: cleanEvalClasses took 2.819334ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Load.loadUnit(file:/Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/, ...) took 2199.736917ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: load took 2204.193541ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: resolveProjects took 0.047916ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: finalTransforms took 9.898417ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: config.delegates took 0.153625ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: Def.make(settings)... took 45.516666ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: structureIndex took 10.386375ms[0m
+[0m[[0m[0mdebug[0m] [0m[0mLoad.apply: mkStreams took 0.001208ms[0m
+[0m[[0m[0minfo[0m] [0m[0mset current project to Day-18-and-19 (in build file:/Users/neerajkumarmilan/Desktop/scala_learning/Day-18-and-19/)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtPopOnFailure, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(resumeFromFailure, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(notifyUsersAboutShell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(iflast shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
